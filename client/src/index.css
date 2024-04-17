@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+  @layer utilities{
+    .inputDiv{
+      @apply flex flex-col relative mb-4
+    }
+    .inputBox{
+      @apply bg-transparent border-[2px] border-[#5d6d7e] p-3 rounded-md outline-none text-[#5d6d7e] duration-200
+    }
+    .inputBox~label{
+      @apply absolute text-slate-500 p-[15px] uppercase tracking-[3px] pointer-events-none duration-200
+    }
+    .inputBox:valid~label,.inputBox:focus~label{
+      @apply text-[#2b3d4f] transform translate-x-[20px] translate-y-[-10px] py-0 bg-[#edf1f2]
+    }
+    .inputBox:valid,.inputBox:focus{
+      @apply border-[#2b3d4f]
+    }
+  }
