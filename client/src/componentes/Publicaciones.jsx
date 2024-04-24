@@ -1,11 +1,9 @@
 import Axios from "axios";
 import { useState } from "react";
-import { useEffect } from "react";
-import { VerLibro } from "./VerLibro";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 export const Publicaciones = () => {
   const [publicacionesList, setPublicaciones]=useState([]);
-  const [ID, setId] = useState("");
 
 
   const getPublicaciones = ()=>{
@@ -33,11 +31,9 @@ export const Publicaciones = () => {
         Libros gratis
       </h1>
       <div className="grid grid-cols-5 gap-6 ml-10">
-        {publicacionesList.map((val, key) => (
+        {publicacionesList?.map((val, key) => (
           val.precio == 0 &&(
           <div key={val.id}>
-            {/* onClick={() => setId(val.ID)} */}
-
             <Link to={`/libro/${val.id}`}>
               <img
                 className="h-[38vh] object-cover shadow shadow-[#5d6d7e] rounded-lg hover:contrast-50  "
@@ -55,10 +51,9 @@ export const Publicaciones = () => {
         Libros de pago
       </h1>
         <div className="grid grid-cols-5 gap-6 ml-10">
-          {publicacionesList.map((val, key) => (
+          {publicacionesList?.map((val, key) => (
               val.precio > 0 && (
             <div key={val.id}>
-              {/* onClick={() => setId(val.ID)} */}
               <Link to={`/libroPa/${val.id}`}>
                 <img
                   className="h-[38vh] object-cover shadow shadow-[#5d6d7e] rounded-lg hover:contrast-50  "

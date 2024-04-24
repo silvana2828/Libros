@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Axios  from "axios";
-export function VerLibro() {
+export function VerLibro({allProducts, setAllProducts}) {
   const { id } = useParams();
   const [espera, setEspera] = useState({});
-
+  
+  const onAddProducts = espera =>{
+    setAllProducts([...allProducts, espera])
+  }; console.log(allProducts)
+  
   const obtener =()=>{
     Axios.get(`http://localhost:3000/libros/${id}`).then((response)=>{
       setEspera(response.data)
@@ -29,9 +33,14 @@ export function VerLibro() {
             <span className="font-bold">$</span>
             {espera && espera.precio}
           </h1>
-          <button className="bg-transparent items-center border-[2px] border-[#5d6d7e] p-3 rounded-md outline-none hover:bg-[#bdc3c7] text-[#354a5f] tracking-[3px] uppercase" onClick={mensaje}>
+          <a
+            href={espera.pdf}
+            download
+            className="bg-transparent text-center border-[2px] border-[#5d6d7e] p-3 rounded-md outline-none hover:bg-[#bdc3c7] text-[#354a5f] tracking-[3px] uppercase"
+            onClick={()=> onAddProducts(espera)}
+          >
             Descargar
-          </button>
+          </a>
         </div>
         <div className="w-[60%] p-7 ">
           <h1 className=" mb-7 text-2xl text-azul-oscuro border-l-2 border-gris-oscuro pl-2 capitalize">

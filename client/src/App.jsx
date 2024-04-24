@@ -10,29 +10,25 @@ import { Publicar } from './administrador/Publicar';
 import { MisLibros } from './componentes/MisLibros';
 import { Ventas } from './administrador/ventas';
 import { VerLibroPa } from './componentes/VerLibroPa';
+import { useState } from 'react';
 function App() {
+  const [allProducts, setAllProducts] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [countProducts, setCountProducts] = useState(0);
+
 
   return (
     <Router>
       <div className="">
-        {/* <Header></Header> */}
-        {/* <Ventas></Ventas> */}
-        {/* <MisLibros></MisLibros> */}
-        {/* <VerLibro></VerLibro> */}
-        {/* <Publicaciones></Publicaciones> */}
-        {/* <Publicar></Publicar> */}
-        {/* <Inicio></Inicio> */}
-        {/* <Formu></Formu> */}
-        {/* <FormuSe></FormuSe> */}
         <Routes>
-          <Route path='/' element={<Header/>}>
-            <Route path="/misLibros" element={<MisLibros />}></Route>
+          <Route path="/" element={<Header />}>
+            <Route path="/misLibros" element={<MisLibros allProducts={allProducts} setAllProducts={setAllProducts} total={total} setTotal={setTotal} countProducts={countProducts} setCountProducts={setCountProducts}/>}></Route>
             <Route path="/publicar" element={<Publicar />}></Route>
-            <Route path="/ventas" element={<Ventas />}></Route>
-            <Route index path='/inicio' element={<Inicio />}></Route>
+            <Route path="/ventas" element={<Ventas allProducts={allProducts} setAllProducts={setAllProducts} total={total} setTotal={setTotal} countProducts={countProducts} setCountProducts={setCountProducts}/>}></Route>
+            <Route index path="/inicio" element={<Inicio />}></Route>
             <Route path="/publicaciones" element={<Publicaciones />}></Route>
-            <Route path="/libro/:id" element={<VerLibro />}></Route>
-            <Route path="/libroPa/:id" element={<VerLibroPa />}></Route>
+            <Route path="/libro/:id" element={<VerLibro allProducts={allProducts} setAllProducts={setAllProducts} total={total} setTotal={setTotal} countProducts={countProducts} setCountProducts={setCountProducts}/>}></Route>
+            <Route path="/libroPa/:id" element={<VerLibroPa allProducts={allProducts} setAllProducts={setAllProducts} total={total} setTotal={setTotal} countProducts={countProducts} setCountProducts={setCountProducts}/>}></Route>
             <Route path="/iniciar" element={<FormuSe />}></Route>
             <Route path="/Registrar" element={<Formu />}></Route>
           </Route>

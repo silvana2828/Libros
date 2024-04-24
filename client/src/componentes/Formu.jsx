@@ -14,6 +14,7 @@ export const Formu = () => {
      alert("Usuario registrado");
      });
     };
+    
   return (
     <div className="flex justify-center items-center h-screen">
       <form className=" shadow-lg shadow-[#c1c3e0] p-10 rounded-lg">

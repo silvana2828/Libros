@@ -2,33 +2,65 @@ import { useState } from "react";
 import Axios from "axios";
 
 export const Publicar = () => {
-      const [titulo, setTitulo] = useState("");
-      const [descripcion, setDescripcion] = useState("");
-      const [precio, setPrecio] = useState("");
-      const [url, setUrl] = useState("");
-      const [pdf, setPdf] = useState(null);
+  const [titulo, setTitulo] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [precio, setPrecio] = useState("");
+  const [url, setUrl] = useState("")
+  const [file, setFile] = useState("");
 
-      const handlePdfChange = (event) => {
-        setPdf(event.target.files[0]);
-        alert("escogiste un archivo")
-        };
+  const upload = () =>{
+    const formData = new FormData()
+    formData.append("titulo", titulo),
+    formData.append("descripcion", descripcion),
+    formData.append("precio", precio),
+    formData.append("url", url),
+    formData.append("file", file)
+    console.log(formData)
+    Axios.post('http://localhost:3000/create', formData).then((response)=>{
+      console.log(response)
+    }).then(res=> console.log(res)).catch(err => console.log(err))
+  }
 
-      const add =()=>{
-        Axios.post("http://localhost:3000/create",{
-          titulo:titulo,
-          descripcion:descripcion,
-          precio:precio,
-          url:url,
-          pdf:pdf,
+  //   setPdf(event.target.files[0]);
+  //   alert("escogiste un archivo")
+  //   };
 
-        }).then(()=>{
-          // getPublicaciones();
-          alert("Libro registrado")
-        })
-      }
+  // const UploadPDF = () => {
+  // const [pdf, setPdf] = useState(null);
+
+  // const handlePdfChange = (event) => {
+  //   setPdf(event.target.files[0]);
+  // };
+  // }
+  // const funcionImag = ({archivo}) =>{
+  //  const guardar =  Axios.post("http://localhost:3000/images/single", {
+  //     archivo : archivo
+  //   }
+  // );
+  //     console.log(guardar) 
+  //     setFile(guardar);
+  // }
+
+  // const add = () => {
+  //   Axios.post("http://localhost:3000/create", {
+  //     titulo: titulo,
+  //     descripcion: descripcion,
+  //     precio: precio,
+  //     url: url,
+  //     file: file,
+  //   }).then((response) => {
+  //     alert(response)
+  //   }).catch((error)=>{
+  //     console.log(error.message)
+  //   });
+  // };
+
   return (
     <div className="flex justify-center items-center h-screen">
-      <form className=" shadow-lg shadow-[#c1c3e0] p-10 rounded-lg">
+      <form
+        className=" shadow-lg shadow-[#c1c3e0] p-10 rounded-lg"
+        encType="multipart/form-data"
+      >
         <h1 className=" text-[#354a5f] text-center mb-7 text-3xl font-bold">
           Publicar libro
         </h1>
@@ -88,10 +120,10 @@ export const Publicar = () => {
                 id=""
                 className="hidden"
                 type="file"
-                // onChange={(event) => {
-                //   setPdf(event.target.value);
-                // }}
-                onChange={handlePdfChange}
+                name="file"
+                onChange={(event) => {
+                  setFile(event.target.files[0]);
+                }}
               />
             </label>
           </div>
@@ -99,10 +131,10 @@ export const Publicar = () => {
             className=" w-[350px] bg-[#354a5f] text-white items-center justify-center  border-[2px] border-[#5d6d7e] p-3 rounded-md outline-none hover:bg-[#bdc3c7] hover:text-[#354a5f] tracking-[3px] uppercase"
             type="submit"
             value="Publicar Libro"
-            onClick={add}
+            onClick={()=> upload()}
           />
         </div>
       </form>
     </div>
   );
-}
+};
