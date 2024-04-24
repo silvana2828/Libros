@@ -37,7 +37,7 @@ export function VerLibroPa({ allProducts, setAllProducts, total, setTotal}) {
             className="bg-transparent text-center border-[2px] border-[#5d6d7e] p-3 rounded-md outline-none hover:bg-[#bdc3c7] text-[#354a5f] tracking-[3px] uppercase"
             onClick={() => onAddProducts(espera)}
           >
-            Descargar
+            Comprar
           </a>
         </div>
         <div className="w-[60%] p-7 ">
